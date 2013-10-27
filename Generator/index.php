@@ -6,6 +6,8 @@
     <title>Graphviz</title>
     <link rel="stylesheet" href="application.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/prism/0.1/prism.css" />
+
+    <script src="//cdn.jsdelivr.net/jquery/2.0.3/jquery-2.0.3.min.js"></script>
     <script src="//cdn.jsdelivr.net/ace/1.1.01/min/ace.js"></script>
     <script src="//cdn.jsdelivr.net/ace/1.1.01/min/ext-elastic_tabstops_lite.js"></script>
 </head>
@@ -46,6 +48,10 @@
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/solarized_light");
     editor.getSession().setMode("ace/mode/dot");
+    
+    $('form').on("submit", function (p_oEvent) {
+        $('.ace_text-input').attr('name','graph').val(editor.getSession().getValue());
+    });
 </script>
 </body>
 </html>
