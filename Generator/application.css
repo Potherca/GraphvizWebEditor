@@ -1,0 +1,125 @@
+/*
+    base3:     rgb(253, 246, 227)
+    base2:     rgb(238, 232, 213)
+    base1:     rgb(147, 161, 161)
+    base0:     rgb(131, 148, 150)
+
+    base00:    rgb(101, 123, 131)
+    base01:    rgb( 88, 110, 117)
+    base02:    rgb(  7,  54,  66)
+    base03:    rgb(  0,  43,  54)
+
+    blue:      #268bd2; rgb( 38, 139, 210)
+    cyan:      #2aa198; rgb( 42, 161, 152)
+    green:     #859900; rgb(133, 153,   0)
+    magenta:   #d33682; rgb(211,  54, 130)
+    orange:    #cb4b16; rgb(203,  75,  22)
+    red:       #dc322f; rgb(220,  50,  47)
+    violet:    #6c71c4; rgb(108, 113, 196)
+    yellow:    #b58900; rgb(181, 137,   0)
+*/
+        * {
+            margin: 0; padding: 0;
+        }
+        
+        html, body {
+            height: 100%;
+            background: rgb(238, 232, 213);
+            font-family: sans-serif;
+        }
+
+        body > div, form {
+            height: 100%;
+            width: 50%;
+            float: left;
+            text-align: center;
+        }
+        
+        textarea {
+            width: 92%;
+            border: none;
+            background: rgb(253, 246, 227);
+            border: 1px solid rgb(147, 161, 161);
+            border-radius: 0.35em;
+            padding: 2%;
+            margin: 2%;
+            height: 85%;
+            max-height: 85%;
+            color: rgb(7, 54, 66);
+        }
+                
+        button {
+            margin: 0 auto;
+            color: rgb(0,0,0,);
+        }
+        
+        .image-container {
+            position: relative;
+            color: rgb( 88, 110, 117);
+            height: 85%;
+        }
+
+        .image-container > img {
+            position: absolute;
+            border: 1px solid rgb(101, 123, 131);
+            display: block;
+            max-width: 98%;
+            max-height: 98%;
+            left: -0.75%;
+            margin: 2% 0.75%;
+            background: rgb(253, 246, 227);
+        }
+        
+        footer {
+            background: rgb(253, 246, 227);
+            height: 15%;
+            position: absolute;
+            width: 50%;
+            left: 50%;
+            bottom: 2em;
+            text-indent: 1em;
+        }
+        
+        footer > p {
+            border: 1px solid;
+        }
+        
+        footer > .output-console {
+            height: 100%;
+            overflow:scroll;            
+            background: rgb(255,255,255);
+            border: 1px solid rgb(147, 161, 161);
+            color: rgb(147, 161, 161);
+        }
+        
+        .error textarea,
+        .error footer > p {
+            border-color: rgb(220, 50, 47);
+            color: rgb(220,  50,  47);
+        }
+
+    fieldset {
+        display: inline-block;
+        font-size: 90%;
+        border: none;
+        position: relative;
+        margin-left: 4em;
+    }
+    
+    legend {
+        position: absolute;
+        left: -3em;
+    }
+    
+    label {
+        margin-left: 1em;
+    }
+    fieldset input {
+        vertical-align: bottom;
+    }
+    
+    .previous-graph {
+        opacity: 0.2;
+    }
+    
+/*EOF*/
