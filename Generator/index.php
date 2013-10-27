@@ -5,6 +5,9 @@
     <meta charset="utf-8" />
     <title>Graphviz</title>
     <link rel="stylesheet" href="application.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/prism/0.1/prism.css" />
+    <script src="//cdn.jsdelivr.net/ace/1.1.01/min/ace.js"></script>
+    <script src="//cdn.jsdelivr.net/ace/1.1.01/min/ext-elastic_tabstops_lite.js"></script>
 </head>
 
 <body<?= $bError?' class="error"':''?>>
@@ -14,7 +17,7 @@
     <!-- @TODO: Improve Application styles (also, responsive...?) -->
     <form method="POST">
         <input type="hidden" name="token" value="<?=$sToken?>" />
-        <textarea name="graph"><?=$sGraph?></textarea>
+        <div name="graph" id="editor"><?=$sGraph?></div>
 
         <button>Render graph in graphviz</button>
         <fieldset>
@@ -39,7 +42,10 @@
         <p><?=$sToken?></p>
         <pre class="output-console"><?=$sOutput?></pre>
     </footer>
-    <script>
-    </script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/solarized_light");
+    editor.getSession().setMode("ace/mode/dot");
+</script>
 </body>
 </html>

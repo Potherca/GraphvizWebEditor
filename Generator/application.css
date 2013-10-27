@@ -35,7 +35,7 @@
             text-align: center;
         }
         
-        textarea {
+        #editor {
             width: 92%;
             border: none;
             background: rgb(253, 246, 227);
@@ -46,6 +46,7 @@
             height: 85%;
             max-height: 85%;
             color: rgb(7, 54, 66);
+            text-align:left;
         }
                 
         button {
