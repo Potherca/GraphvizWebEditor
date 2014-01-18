@@ -38,7 +38,7 @@
 
     <div class="image-container">
         <?=$sGraphHtml?>
-        <?=($bShowPrevious && isset($sPreviousToken)?'<img src="./file/' . $sPreviousToken .'.dot.png" class="previous-graph"/>':'')?>
+        <?=(isset($sPreviousToken)?'<img src="./file/' . $sPreviousToken .'.dot.png" class="previous-graph' . ($bShowPrevious?'':' hidden') .'"/>':'')?>
     </div>
     <footer>
         <p><?=$sToken?></p>

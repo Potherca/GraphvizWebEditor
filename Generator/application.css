@@ -70,6 +70,11 @@
             margin: 2% 0.75%;
             background: rgb(253, 246, 227);
         }
+
+        .image-container .hidden {
+            display: none;
+        }
+
         
         footer {
             background: rgb(253, 246, 227);
@@ -122,5 +127,5 @@
     .previous-graph {
         opacity: 0.2;
     }
-    
+        
 /*EOF*/
