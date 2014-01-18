@@ -52,6 +52,10 @@
     $('form').on("submit", function (p_oEvent) {
         $('.ace_text-input').attr('name','graph').val(editor.getSession().getValue());
     });
+    
+    $('input[name="show-previous"]').click(function(p_oEvent){
+        $('.previous-graph').toggle('hidden');
+    });
 </script>
 </body>
 </html>
