@@ -19,7 +19,7 @@
     <!-- @TODO: Improve Application styles (also, responsive...?) -->
     <form method="POST">
         <input type="hidden" name="token" value="<?=$sToken?>" />
-        <div name="graph" id="editor"><?=$sGraph?></div>
+        <div name="graph" id="editor"><?=htmlentities($sGraph)?></div>
 
         <button>Render graph in graphviz</button>
         <fieldset>
