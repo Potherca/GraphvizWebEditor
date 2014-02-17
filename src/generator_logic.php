@@ -1,78 +1,70 @@
 <?php
+namespace Potherca\GraphvizWebEditor;
 
-// @FIXME: I think the functinality is clear. Time to clean this code into seperate classes.
+// $oFilesystem is currently set from index.php
+/** @var $oFilesystem Filesystem */
 
-    set_error_handler(
-        function ($errno, $errstr, $errfile, $errline ) {
-            throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
-        }
-    );
+// $sFileStorePath is currently set from index.php
+use League\Flysystem\Filesystem;
 
-    $sOutput = '';
-    $bError = false;
-    $bVerbose = false;
-    $bShowPrevious = true;
-    $sGraph = '';
-    $aSupportedImageTypes = array('png', 'svg');
+$bRedirect = false;
+$bError = false;
+$sOutput = '';
 
-    // @FIXME: Sanitize user input!
-    if(isset($_POST['graph'])) {
-        $sGraph = $_POST['graph'];
-    }
+// @FIXME: I think the functionality is clear. Time to clean this code into separate classes.
 
-    if(isset($_POST['verbose'])) {
-        $bVerbose = true;
-    }
-
-    if(isset($_POST['token'])) {
-        $sPreviousToken = $_POST['token'];
-    }
-
-    if(isset($_POST['show-previous']) === false) {
-        $bShowPrevious = false;
-    }
-
-    if(isset($_POST['image-type']) && in_array($_POST['image-type'], $aSupportedImageTypes)) {
-        $sImageType = $_POST['image-type'];
-    } else {
-        $sImageType = 'png';
-    }
-
-    $sExtension = '.' . $sImageType;
-
-    $sFileStorePath = PROJECT_ROOT . '/web/file/';
-
-    $bRedirect = false;
-    if(isset($_GET['token']) && file_exists($sFileStorePath . $_GET['token'] . '.dot') === true){
-        if($sGraph === ''){
-            $sToken = $_GET['token'];
-            $sFile = $sFileStorePath . $sToken . '.dot';
-            $sGraph = file_get_contents($sFile);
-        } else {
+    if (isset($sToken)){
+        if ($sGraph === '') {
+            // Retrieve existing graph
+            $sFile = $sToken . '.dot';
+            $sGraph = $oFilesystem->read($sFile);
+       } else {
             // Create new graph and redirect to it
             $sToken = md5($sGraph);
-            $sFile = $sFileStorePath . $sToken . '.dot';
+            $sFile = $sToken . '.dot';
+            if($oFilesystem->has($sToken . '.dot') === false) {
+                $oFilesystem->write($sFile, $sGraph);
+            }
             $bRedirect = true;
         }
     } else {
+        // @TODO: This is another IO hit we don't need. Maybe better hard-code the value?
         if($sGraph === ''){
             $sGraph = file_get_contents(PROJECT_ROOT . '/example.dot');
         }
+
         $sToken = md5($sGraph);
-        $sFile = $sFileStorePath . $sToken . '.dot';
+        $sFile = $sToken . '.dot';
+
+        try {
+            if($oFilesystem->has($sToken . '.dot') === false) {
+                $oFilesystem->write($sFile, $sGraph);
+            }
+        } catch(\ErrorException $eError){
+            $sOutput .= $eError;
+            $bError = true;
+        }
     }
 
-    $sGraphHtml = '<a href="./file/' . $sToken . '.dot' . $sExtension . '" target="_blank"><img src="./file/' . $sToken . '.dot' . $sExtension . '" /></a>';
+    $sImageFile = $sFile . $sExtension;
 
-    if(file_exists($sFile . $sExtension) === true) {
-        $sOutput = 'File already exists';
+    $sGraphHtml = '<a href="./?file=' . $sImageFile . '" target="_blank"><img src="./?file=' . $sToken . '.dot' . $sExtension . '" /></a>';
+
+    if($oFilesystem->has($sImageFile) === true) {
+        $sOutput .= 'File already exists';
+        // @TODO: Read out log and add to $sOutput
     } else {
-        if(file_exists($sFile) === false) {
+        if($oFilesystem->has($sFile) === false) {
+            // Store graph
             try {
-                file_put_contents($sFile, $sGraph);
+                $bStored = $oFilesystem->put($sFile, $sGraph);
+                if($bStored === false){
+                    $bError = true;
+                    $sOutput .= 'Could not store graph "' . $sFile . '"';
+                }
             } catch(\Exception $eAny){
                 $bError = true;
-                $sOutput = $eAny->getMessage();
+                $sOutput .= $eAny->getMessage();
             }
         }
 
@@ -81,21 +73,28 @@
             $sFlags =
                   ($bVerbose?' -v':'')
                 . ' -T' . $sImageType .' '              // Output Type
-                . ' -o "' . $sFile . $sExtension . '"'  // Output File
-                . ' "' . $sFile . '"'                   // Input File
+                //. ' -o "' . $sFile . $sExtension . '"'  // Output File
+                //. ' "' . $sFile . '"'                   // Input File
             ;
 
             try {
                 $aResult = executeCommand('dot ' . $sFlags, $sGraph);
-                $sOutput .= $aResult['stdout'];
+                $sGraphImage = $aResult['stdout'];
+
+                $bStored = $oFilesystem->put($sImageFile, $sGraphImage);
+                if($bStored === false){
+                    $bError = true;
+                    $sOutput .= 'Could not store graph image "' . $sImageFile . '"';
+                }
+
                 $sOutput .= $aResult['stderr'];
             } catch(\Exception $eAny){
                 $bError = true;
-                $sOutput = $eAny->getMessage();
+                $sOutput .= $eAny->getMessage();
                 $aResult['return'] = 256;
             }
 
-            if($aResult['return'] > 0 && file_exists($sFile . $sExtension) === false){
+            if($aResult['return'] > 0 && $oFilesystem->has($sImageFile) === false){
                 $bError = true;
             }
         }
@@ -117,7 +116,7 @@
         header("Location: " . $sUrl);
         die;
     } else {
-        $sOutput = str_replace(__DIR__, '', $sOutput);
+        $sOutput = str_replace($sFileStorePath.'/', '', $sOutput);
     }
 
 

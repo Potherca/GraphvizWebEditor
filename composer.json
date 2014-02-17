@@ -1,0 +1,20 @@
+{
+    "name": "potherca/GraphvizWebEditor",
+    "description": "Web-based Graphical interface to create graphs with Graphviz dot.",
+    "minimum-stability": "stable",
+    "license": "GPL3",
+    "authors": [
+        {
+            "name": "Potherca",
+            "email": "potherca@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Potherca\\GraphvizWebEditor\\": "src/"
+        }
+    },
+    "require": {
+        "league/flysystem": "0.2.*"
+    }
+}
