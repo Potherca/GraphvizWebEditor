@@ -12,7 +12,8 @@
     $bError = false;
     $bVerbose = false;
     $bShowPrevious = true;
-    $sGraph = file_get_contents(PROJECT_ROOT . '/example.dot');
+    $sGraph = '';
+    $aSupportedImageTypes = array('png', 'svg');
 
     // @FIXME: Sanitize user input!
     if(isset($_POST['graph'])) {
@@ -31,21 +32,32 @@
         $bShowPrevious = false;
     }
 
-    $aSupportedImageTypes = array('png', 'svg');
     if(isset($_POST['image-type']) && in_array($_POST['image-type'], $aSupportedImageTypes)) {
         $sImageType = $_POST['image-type'];
     } else {
         $sImageType = 'png';
     }
+
     $sExtension = '.' . $sImageType;
 
     $sFileStorePath = PROJECT_ROOT . '/web/file/';
 
+    $bRedirect = false;
     if(isset($_GET['token']) && file_exists($sFileStorePath . $_GET['token'] . '.dot') === true){
-        $sToken = $_GET['token'];
-        $sFile = $sFileStorePath . $sToken . '.dot';
-        $sGraph = file_get_contents($sFile);
+        if($sGraph === ''){
+            $sToken = $_GET['token'];
+            $sFile = $sFileStorePath . $sToken . '.dot';
+            $sGraph = file_get_contents($sFile);
+        } else {
+            // Create new graph and redirect to it
+            $sToken = md5($sGraph);
+            $sFile = $sFileStorePath . $sToken . '.dot';
+            $bRedirect = true;
+        }
     } else {
+        if($sGraph === ''){
+            $sGraph = file_get_contents(PROJECT_ROOT . '/example.dot');
+        }
         $sToken = md5($sGraph);
         $sFile = $sFileStorePath . $sToken . '.dot';
     }
@@ -93,7 +105,21 @@
             $sGraphHtml = '';
         }
     }
-    $sOutput = str_replace(__DIR__, '', $sOutput);
+    if ($bRedirect === true) {
+        $sUrl = $_SERVER['REQUEST_URI'];
+        $iQueryPosition = strpos($sUrl, '?');
+        if ($iQueryPosition === false) {
+            $sUrl .= '?token=' . $sToken;
+        } else {
+            $sUrl = substr_replace($sUrl, '?token=' . $sToken, $iQueryPosition);
+        }
+
+        header("Location: " . $sUrl);
+        die;
+    } else {
+        $sOutput = str_replace(__DIR__, '', $sOutput);
+    }
+
 
 /*
  * Because exec/sytem/etc. Are a bit lame in giving error feedback a workaround

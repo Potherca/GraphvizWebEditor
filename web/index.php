@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?
 if(defined('PROJECT_ROOT') === false) {
     define('PROJECT_ROOT', realpath(__DIR__ . '/../'));
@@ -8,7 +7,7 @@ require_once(PROJECT_ROOT . '/generator.php')
 
 // @TODO: This code should be split into separate files for separate concerns.
 
-?>
+?><!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8" />
@@ -63,7 +62,7 @@ require_once(PROJECT_ROOT . '/generator.php')
         <?=(isset($sPreviousToken)?'<img src="./file/' . $sPreviousToken .'.dot.png" class="previous-graph' . ($bShowPrevious?'':' hidden') .'"/>':'')?>
     </div>
     <footer>
-        <p><?=$sToken?></p>
+        <a class="token" href="?token=<?=$sToken?>" target="_blank"><?=$sToken?></a>
         <pre class="output-console"><?=$sOutput?></pre>
     </footer>
 <script>

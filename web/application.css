@@ -21,7 +21,7 @@
         * {
             margin: 0; padding: 0;
         }
-        
+
         html, body {
             height: 100%;
             background: rgb(238, 232, 213);
@@ -34,7 +34,7 @@
             float: left;
             text-align: center;
         }
-        
+
         #editor {
             width: 92%;
             border: none;
@@ -48,12 +48,12 @@
             color: rgb(7, 54, 66);
             text-align:left;
         }
-                
+
         button {
             margin: 0 auto;
             color: rgb(0,0,0,);
         }
-        
+
         .image-container {
             position: relative;
             color: rgb( 88, 110, 117);
@@ -64,14 +64,14 @@
             position: absolute;
             border: 1px solid rgb(101, 123, 131);
             display: block;
-            
+
             max-width: 98%;
             max-height: 98%;
-            
+
             left: -0.75%;
             margin: 2% auto;
             position: relative;
-            
+
             background: rgb(253, 246, 227);
         }
 
@@ -79,7 +79,7 @@
             display: none;
         }
 
-        
+
         footer {
             background: rgb(253, 246, 227);
             height: 15%;
@@ -89,21 +89,24 @@
             bottom: 2em;
             text-indent: 1em;
         }
-        
-        footer > p {
+
+        footer .token {
+            display: block;
             border: 1px solid;
+            color: rgb(7, 54, 66);
+            text-decoration: none;
         }
-        
-        footer > .output-console {
+
+        footer .output-console {
             height: 100%;
-            overflow:scroll;            
+            overflow:scroll;
             background: rgb(255,255,255);
             border: 1px solid rgb(147, 161, 161);
             color: rgb(147, 161, 161);
         }
-        
+
         .error textarea,
-        .error footer > p {
+        .error footer .token {
             border-color: rgb(220, 50, 47);
             color: rgb(220,  50,  47);
         }
@@ -115,21 +118,21 @@
         position: relative;
         margin-left: 4em;
     }
-    
+
     legend {
         position: absolute;
         left: -3em;
     }
-    
+
     label {
         margin-left: 1em;
     }
     fieldset input {
         vertical-align: bottom;
     }
-    
+
     .previous-graph {
         opacity: 0.2;
     }
-        
+
 /*EOF*/
