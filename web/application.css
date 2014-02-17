@@ -57,17 +57,21 @@
         .image-container {
             position: relative;
             color: rgb( 88, 110, 117);
-            height: 85%;
+            max-height: 75%;
         }
 
-        .image-container > img {
+        .image-container img {
             position: absolute;
             border: 1px solid rgb(101, 123, 131);
             display: block;
+            
             max-width: 98%;
             max-height: 98%;
+            
             left: -0.75%;
-            margin: 2% 0.75%;
+            margin: 2% auto;
+            position: relative;
+            
             background: rgb(253, 246, 227);
         }
 

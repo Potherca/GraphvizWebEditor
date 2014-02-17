@@ -1,4 +1,7 @@
 <?php
+
+// @FIXME: I think the functinality is clear. Time to clean this code into seperate classes.
+
     set_error_handler(
         function ($errno, $errstr, $errfile, $errline ) {
             throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
@@ -9,50 +12,47 @@
     $bError = false;
     $bVerbose = false;
     $bShowPrevious = true;
-    $sGraph = <<<'DOT'
-digraph MyCoolGraph {
-    graph [
-        compound = true     // To clip the head at the cluster border
-        dpi = 200
-        penwidth = 2        // Make the cluster's borders a bit thicker
-        rankdir = "LR"
-        ranksep = 1         // Add a bit more space inbetween nodes
-    ]
+    $sGraph = file_get_contents(PROJECT_ROOT . '/example.dot');
 
-    node [
-        fontname = "Bitstream Vera Sans"
-        shape = "record"
-    ]
-
-    edge [
-    ]
-
-    a -> b
-}
-DOT;
-    
     // @FIXME: Sanitize user input!
     if(isset($_POST['graph'])) {
         $sGraph = $_POST['graph'];
     }
-    
+
     if(isset($_POST['verbose'])) {
         $bVerbose = true;
     }
-    
+
     if(isset($_POST['token'])) {
         $sPreviousToken = $_POST['token'];
     }
-    
+
     if(isset($_POST['show-previous']) === false) {
         $bShowPrevious = false;
     }
-    
-    $sToken = md5($sGraph);
-    $sFile = __DIR__ . '/file/' . $sToken . '.dot';
-    $sGraphHtml = '<img src="./file/' . $sToken . '.dot.png" />';
 
-    if(file_exists($sFile . '.png') === true) {
+    $aSupportedImageTypes = array('png', 'svg');
+    if(isset($_POST['image-type']) && in_array($_POST['image-type'], $aSupportedImageTypes)) {
+        $sImageType = $_POST['image-type'];
+    } else {
+        $sImageType = 'png';
+    }
+    $sExtension = '.' . $sImageType;
+
+    $sFileStorePath = PROJECT_ROOT . '/web/file/';
+
+    if(isset($_GET['token']) && file_exists($sFileStorePath . $_GET['token'] . '.dot') === true){
+        $sToken = $_GET['token'];
+        $sFile = $sFileStorePath . $sToken . '.dot';
+        $sGraph = file_get_contents($sFile);
+    } else {
+        $sToken = md5($sGraph);
+        $sFile = $sFileStorePath . $sToken . '.dot';
+    }
+
+    $sGraphHtml = '<a href="./file/' . $sToken . '.dot' . $sExtension . '" target="_blank"><img src="./file/' . $sToken . '.dot' . $sExtension . '" /></a>';
+
+    if(file_exists($sFile . $sExtension) === true) {
         $sOutput = 'File already exists';
     } else {
         if(file_exists($sFile) === false) {
@@ -63,14 +63,14 @@ DOT;
                 $sOutput = $eAny->getMessage();
             }
         }
-        
+
         if($bError === false) {
             $aResult = array();
-            $sFlags = 
+            $sFlags =
                   ($bVerbose?' -v':'')
-                . ' -Tpng '                     // Output Type
-                . ' -o "' . $sFile . '.png"'    // Output File
-                . ' "' . $sFile . '"'           // Input File
+                . ' -T' . $sImageType .' '              // Output Type
+                . ' -o "' . $sFile . $sExtension . '"'  // Output File
+                . ' "' . $sFile . '"'                   // Input File
             ;
 
             try {
@@ -83,11 +83,11 @@ DOT;
                 $aResult['return'] = 256;
             }
 
-            if($aResult['return'] > 0){
+            if($aResult['return'] > 0 && file_exists($sFile . $sExtension) === false){
                 $bError = true;
             }
         }
-        
+
         if($bError === true){
             $sToken = 'Error!';
             $sGraphHtml = '';

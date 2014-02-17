@@ -1,0 +1,108 @@
+digraph ClassDiagram { 
+#//////////////////////////////// Introduction \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+/*
+    This graph is meant as a starting point to help you create UML Class 
+    Diagrams by providing a preset for edges and nodes. 
+    
+    To use it, you need to take the folowing steps:
+
+     - Copy and paste (or "save as") this graph into a new file
+     - Rename the relevant labels (anything with the word "Example" in it).
+     - Add nodes (inside subgraphs when needed)
+     - Add connections for the nodes
+    
+    Make sure you place your connections under the right headers, otherwise the
+    decoration won't match the UML specifications.
+
+    For each module you should use a separate subgraph. Make sure the name of 
+    your subgraph starts with `cluster_`
+    
+    If you don't lik ethe colors, the easiest way to ammend this is by changing
+    the defined colorscheme (currently "pastel13") in the "General Styles" 
+    section to any other 3-scheme. All available colorschemes can be found at 
+    http://www.graphviz.org/doc/info/colors.html#brewer
+*/
+#/////////////////////////////// General Styles \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    graph [
+        label = "Example \n Class Diagram"
+        labelloc = t
+
+        //dpi = 200
+        ranksep=0.65
+        nodesep=0.40
+        rankdir=BT
+        bgcolor="#FFFFDD"
+        
+        style="dotted, filled"
+        fillcolor="#FFFFFF"
+    ]
+
+    edge [arrowhead=none]
+
+    node [
+        labeljust="l"
+        colorscheme="pastel13"
+        style=filled
+        fillcolor=3
+        shape=record
+    ]
+
+#/////////////////////////////////// Legend \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    subgraph cluster_legend {
+        label = "Legend"
+        style="solid"
+        ranksep=0.05
+        nodesep=0.01
+        labelloc = b
+        len=0
+
+
+        class [label="Class", fillcolor=3] 
+        abstract [label="Abstract", fillcolor=2]
+        interface [label="Interface", fillcolor=1]
+        
+        class -> abstract -> interface [style="invis"]
+    }
+
+#/////////////////////////// Sub Graphs and Clusters \\\\\\\\\\\\\\\\\\\\\\\\\\\
+    subgraph cluster_ExampleModule {
+        label = "Example Module"
+        
+        
+        {// Interface
+            node [style=filled, fillcolor=1]
+            ExampleInterface [label="{«interface»\nExampleInterface|properties|methods}"]
+        }
+
+        {// Abstracts
+            node [fillcolor=2]
+            AbstractExample
+        }
+
+        // Concrete Classes
+        ExampleFoo
+        ExampleBar
+        ExampleBaz
+    }
+
+
+#//////////////////////////////// Connections \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    {// Implements
+        edge [arrowhead=empty, style=dashed]
+        AbstractExample -> ExampleInterface
+        ExampleFoo -> AbstractExample
+    }
+
+    {// Extends
+        edge [arrowhead=empty]
+
+        // -------------------------------------------------------------------------
+        ExampleBar -> ExampleFoo
+    }
+    
+    {// Composits
+        edge [arrowtail=diamond, arrowhead=none]
+        ExampleBar -> ExampleBaz
+    }
+
+}//ClassDiagram
