@@ -1,0 +1,14 @@
+RewriteEngine On
+
+RewriteRule ^\.htaccess$ - [F]
+
+RewriteCond %{REQUEST_URI} =""
+RewriteRule ^.*$ /web/index.php [NC,L]
+
+RewriteCond %{REQUEST_URI} !^/web/.*$
+RewriteRule ^(.*)$ /web/$1
+
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^.*$ - [NC,L]
+
+RewriteRule ^public/.*$ /web/index.php [NC,L]

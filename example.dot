@@ -17,7 +17,7 @@ digraph ClassDiagram {
     For each module you should use a separate subgraph. Make sure the name of 
     your subgraph starts with `cluster_`
     
-    If you don't lik ethe colors, the easiest way to ammend this is by changing
+    If you don't like the colors, the easiest way to ammend this is by changing
     the defined colorscheme (currently "pastel13") in the "General Styles" 
     section to any other 3-scheme. All available colorschemes can be found at 
     http://www.graphviz.org/doc/info/colors.html#brewer
