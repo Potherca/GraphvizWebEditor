@@ -7,6 +7,12 @@ A GraphViz editor, which is live on [graphviz.herokuapp.com](http://graphviz.her
 
 This is not to worry about, they will be automatically picked up if you set the `heroku-buildpack-multi` as `BUILDPACK_URL` as indicated below. Note that the packages above are slightly different from the original ones, just check the source code of the [compile](https://github.com/mrquincle/heroku-buildpack-graphviz/blob/master/bin/compile) script to get rid of the magic you might think is going on. An important change was `--disable-perl` for the `configure` script, or else the installation breaks.
 
+On the moment the `CACHE_DIR` is emptied with the top-line in the `.buildpacks` file:
+
+    https://github.com/mrquincle/heroku-buildpack-clearcache
+
+If everything runs fine, it is safe to remove this line. It will allow you to cache the build results over different deployments on heroku.
+
 To install:
 
     heroku apps:create invent_name
