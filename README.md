@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/potherca/GraphvizWebEditor.png?label=ready&title=Ready)](https://waffle.io/potherca/GraphvizWebEditor)
 # GraphViz editor
 
 A GraphViz editor, which is live on [graphviz.herokuapp.com](http://graphviz.herokuapp.com) uses the following buildpacks:
