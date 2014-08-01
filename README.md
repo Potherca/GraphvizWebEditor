@@ -27,7 +27,12 @@ Perhaps there are some problems with the composer.lock file. In that case downlo
     composer update
     git add composer.lock
 
+To redeploy to heroku, this trick might be handy:
 
+    git push -f heroku master^:master
+    git push heroku master
+
+It pushes the previous version and then the current version to heroku.
 
 ## Copyrights
 
