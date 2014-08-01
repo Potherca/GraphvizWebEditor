@@ -34,6 +34,15 @@ To redeploy to heroku, this trick might be handy:
 
 It pushes the previous version and then the current version to heroku.
 
+The environmental variables in the buildpack seems to be overwritten by the php one, or actually what happens, I don't care... They don't get exported... So, this means you have to do this yourself.
+
+    heroku config:set PATH=/app/.heroku/php/bin:/app/.heroku/php/sbin:/app/.heroku/graphviz/bin:/usr/local/bin:/usr/bin:/bin
+    heroku config:set LD_LIBRARY_PATH=/app/.heroku/graphviz/lib
+
+Use `heroku run bash` to check if `echo $PATH` has other variables and adjust accordingly.
+
+This information should be good enough to get you up and running!
+
 ## Copyrights
 
 Contributions: 

@@ -9,5 +9,5 @@ class Generator
     protected $sGraph = '';
 
     // @TODO: Get these values from config/cache
-    static public $aSupportedImageTypes = array('png', 'svg');
+    static public $aSupportedImageTypes = array('svg');
 };
