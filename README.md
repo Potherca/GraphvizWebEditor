@@ -31,5 +31,14 @@ Perhaps there are some problems with the composer.lock file. In that case downlo
 
 ## Copyrights
 
+Contributions: 
+* Main code comes mainly from Potherca. 
+* Bug fixing by Anne
+
+Summarized:
+
 * Author: Potherca
 * Author: Anne van Rossum
+* License: unknown, ask Potherca
+* Date: 2012
+
