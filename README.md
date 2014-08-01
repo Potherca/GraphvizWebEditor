@@ -32,4 +32,4 @@ Perhaps there are some problems with the composer.lock file. In that case downlo
 ## Copyrights
 
 * Author: Potherca
-
+* Author: Anne van Rossum
