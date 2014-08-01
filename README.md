@@ -5,7 +5,7 @@ A GraphViz editor, which is live on [graphviz.herokuapp.com](http://graphviz.her
     https://github.com/heroku/heroku-buildpack-php
     https://github.com/mrquincle/heroku-buildpack-graphviz
 
-This is not to worry about, they will be automatically picked up if you set the `heroku-buildpack-multi` as `BUILDPACK_URL` as indicated below.
+This is not to worry about, they will be automatically picked up if you set the `heroku-buildpack-multi` as `BUILDPACK_URL` as indicated below. Note that the packages above are slightly different from the original ones, just check the source code of the [compile](https://github.com/mrquincle/heroku-buildpack-graphviz/blob/master/bin/compile) script to get rid of the magic you might think is going on. An important change was `--disable-perl` for the `configure` script, or else the installation breaks.
 
 To install:
 
