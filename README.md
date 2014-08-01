@@ -1,8 +1,11 @@
 # GraphViz editor
 
-A GraphViz editor, live on [graphviz.herokuapp.com](http://graphviz.herokuapp.com).
+A GraphViz editor, which is live on [graphviz.herokuapp.com](http://graphviz.herokuapp.com) uses the following buildpacks:
     
-    heroku config:add BUILDPACK_URL=https://github.com/jeluard/heroku-buildpack-graphviz.git
+    https://github.com/heroku/heroku-buildpack-php
+    https://github.com/mrquincle/heroku-buildpack-graphviz
+
+This is not to worry about, they will be automatically picked up if you set the `heroku-buildpack-multi` as `BUILDPACK_URL` as indicated below.
 
 To install:
 
