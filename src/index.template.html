@@ -35,7 +35,7 @@
         <label>
             <span>Image Format</span>
             <select name="image-type">
-                <?foreach(Potherca\GraphvizWebEditor\Generator::$aSupportedImageTypes as $sImageType):?>
+                <?foreach($aSupportedImageTypes as $sImageType):?>
 
                 <option
                         value="<?=$sImageType?>"
