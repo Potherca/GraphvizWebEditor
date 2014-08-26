@@ -2,11 +2,19 @@
     "name": "potherca/GraphvizWebEditor",
     "description": "Web-based Graphical interface to create graphs with Graphviz dot.",
     "minimum-stability": "stable",
-    "license": "GPL3",
+    "license": "GPL3+",
     "authors": [
         {
             "name": "Potherca",
-            "email": "potherca@gmail.com"
+            "email": "potherca@gmail.com",
+            "homepage": "http://pother.ca/",
+            "role": "Kick-Ass Web Developer"
+        },
+        {
+            "name": "Anne van Rossum",
+            "email": "anne@dobots.nl",
+            "homepage": "http://www.dobots.nl",
+            "role": "Code Fixer Extraordinaire"
         }
     ],
     "autoload": {
@@ -15,6 +23,6 @@
         }
     },
     "require": {
-        "league/flysystem": "0.2.*"
+        "league/flysystem": "~0.2"
     }
 }
