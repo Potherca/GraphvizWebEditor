@@ -1,10 +1,12 @@
-[![Stories in Ready](https://badge.waffle.io/potherca/GraphvizWebEditor.png?label=ready&title=Ready)](https://waffle.io/potherca/GraphvizWebEditor)
+
+
 # GraphViz editor
 
 ## Introduction
 
 A GraphViz editor, which is live on [graphviz.herokuapp.com]. 
 
+[![Stories ready for development][waffle-image]][Waffle Board]
 
 ## Installation
 
@@ -91,8 +93,12 @@ cache the build results over different deployments on Heroku.
 - **License**: [GPL3]
 - **Date**: 2013-2014
 
+Want to contribute or see the project progress? Visit the [Waffle Board]!
+
 [graphviz.herokuapp.com]: http://graphviz.herokuapp.com
 [compile script]: https://github.com/mrquincle/heroku-buildpack-graphviz/blob/master/bin/compile
 [GPL3]: ./LICENSE
 [Potherca]: http://pother.ca/
 [Anne van Rossum]: https://github.com/mrquincle
+[Waffle Board]: https://waffle.io/potherca/GraphvizWebEditor
+[waffle-image]: https://badge.waffle.io/potherca/GraphvizWebEditor.png?label=waffle:%20ready%20for%20development&title=Issues%20ready%20for%20development
