@@ -1,12 +1,15 @@
-
-
 # GraphViz editor
+
+[![Project Stage Badge: Production Ready]][Project Stage Page]
+[![Dependency Badge]][VersionEye Page]
+[![Codacy Badge]][Codacy Page]
+[![Build Status Badge]][Codeship Page]
+[![License Badge]][GPL3+]
+[![Waffle Badge]][Waffle Page]
 
 ## Introduction
 
-A GraphViz editor, which is live on [graphviz.herokuapp.com]. 
-
-[![Stories ready for development][waffle-image]][Waffle Board]
+A GraphViz editor, which is live on [graphviz.herokuapp.com].
 
 ## Installation
 
@@ -21,12 +24,12 @@ If you clone the git repo on Github you should substitute the repo URL with your
 Now create an Heroku App, add the Multi Buildpack and deploy the code to Heroku:
 
     heroku apps:create my_awesome_app_name
-    heroku config:set BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-multi.git
+    heroku buildpack:set https://github.com/heroku/heroku-buildpack-multi
     git add -u .
     git push heroku master
 
 
-If you run into  problems with the `composer.lock` file, download Composer, run an 
+If you run into  problems with the `composer.lock` file, download Composer, run an
 update and commit the lock file:
 
     curl -sS https://getcomposer.org/installer | php
@@ -34,7 +37,7 @@ update and commit the lock file:
     composer update
     git add composer.lock
 
-### Re-deploy to Heroku 
+### Re-deploy to Heroku
 
 To redeploy to Heroku, this trick might be handy:
 
@@ -43,18 +46,6 @@ To redeploy to Heroku, this trick might be handy:
 
 It pushes the previous version and then the current version to Heroku.
 
-### Set Environment Variables
-
-The environmental variables in the buildpack seems to be overwritten by the php 
-one, or actually what happens, I don't care... They don't get exported... 
-
-This means you have to set them yourself:
-
-    heroku config:set PATH=/app/.heroku/php/bin:/app/.heroku/php/sbin:/app/.heroku/graphviz/bin:/usr/local/bin:/usr/bin:/bin
-    heroku config:set LD_LIBRARY_PATH=/app/.heroku/graphviz/lib
-
-Use `heroku run bash` to check if `echo $PATH` has other variables and adjust accordingly.
-
 ### Done!
 
 This information should be good enough to get you up and running!
@@ -62,43 +53,38 @@ This information should be good enough to get you up and running!
 ### Buildpacks
 
 This app used the following buildpacks for Heroku:
-    
+
 - https://github.com/heroku/heroku-buildpack-php
-- https://github.com/mrquincle/heroku-buildpack-clearcache
-- https://github.com/mrquincle/heroku-buildpack-graphviz
+- https://github.com/weibeld/heroku-buildpack-graphviz.git
 
-These buildpacks will be automatically picked up if you set the `BUILDPACK_URL` 
-to `heroku-buildpack-multi` (as as indicated below). 
-
-Note that the graphviz and clearcache buildpacks are slightly different from the 
-originals. You can check the source-code of the [compile script] to see the 
-changes. 
-
-An important change was `--disable-perl` for the `configure` script, or else the 
-installation breaks.
-
-Currently the `CACHE_DIR` is emptied by the top-line in the `.buildpacks` file:
-
-    https://github.com/mrquincle/heroku-buildpack-clearcache
-
-If everything runs fine, it is safe to remove this line. This will allow you to 
-cache the build results over different deployments on Heroku.
-
+These buildpacks will be automatically picked up if you set the heroku-buildpack-multi (as indicated above).
 
 ## Credits
 
 - **Authors**:
-    - Main code by [Potherca] 
+    - Main code by [Potherca]
     - Bug fixes and several improvements gracefully provided by [Anne van Rossum]
-- **License**: [GPL3]
-- **Date**: 2013-2014
+- **License**: [GPL3+]
 
-Want to contribute or see the project progress? Visit the [Waffle Board]!
+Want to contribute or see the project progress? Visit the [Waffle Page]!
 
-[graphviz.herokuapp.com]: http://graphviz.herokuapp.com
-[compile script]: https://github.com/mrquincle/heroku-buildpack-graphviz/blob/master/bin/compile
-[GPL3]: ./LICENSE
-[Potherca]: http://pother.ca/
 [Anne van Rossum]: https://github.com/mrquincle
-[Waffle Board]: https://waffle.io/potherca/GraphvizWebEditor
-[waffle-image]: https://badge.waffle.io/potherca/GraphvizWebEditor.png?label=waffle:%20ready%20for%20development&title=Issues%20ready%20for%20development
+[compile script]: https://github.com/mrquincle/heroku-buildpack-graphviz/blob/master/bin/compile
+[GPL3+]: ./LICENSE
+[graphviz.herokuapp.com]: http://graphviz.herokuapp.com
+[Potherca]: http://pother.ca/
+
+[Codacy Page]:          https://www.codacy.com/public/potherca/GraphvizWebEditor.git
+[Codeship Page]:        https://www.codeship.io/projects/34086
+[Project Stage Page]:   http://bl.ocks.org/potherca/a2ae67caa3863a299ba0
+[Releases Page]:        /releases/
+[VersionEye Page]:      https://www.versioneye.com/user/projects/53fcf2bae09da3cbb2000717
+[Waffle Page]:          https://waffle.io/potherca/GraphvizWebEditor
+
+[Build Status Badge]:       https://img.shields.io/codeship/80020200-1764-0132-87c7-1e682cfc0f53.svg
+[Codacy Badge]:             https://www.codacy.com/project/badge/588fcadde4084ddc91503a8d8da4afe1
+[Dependency Badge]:         https://www.versioneye.com/user/projects/53fcf2bae09da3cbb2000717/badge.svg?style=flat
+[License Badge]:            https://img.shields.io/badge/License-GPL3%2B-lightgray.svg
+[Project Stage Badge: Production Ready]:   https://img.shields.io/badge/Project%20Stage-Production%20Ready-brightgreen.svg
+[Version Badge]:            https://img.shields.io/github/tag/potherca/GraphvizWebEditor.svg
+[Waffle Badge]:             https://badge.waffle.io/potherca/GraphvizWebEditor.png?label=waffle:%20ready%20for%20development&title=Issues%20ready%20for%20development
