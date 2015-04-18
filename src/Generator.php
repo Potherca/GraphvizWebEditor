@@ -14,23 +14,80 @@ class Generator
      */
     protected $oFilesystem;
 
-    // @TODO: Get these values from config/cache
-    public function getSupportedImageTypes()
+    public function getSupportedImageTypes($p_aSupportedTypes)
     {
-        static $aImageTypes;
+        static $aSupportedImageTypes;
 
-        if ($aImageTypes === null) {
+        if ($aSupportedImageTypes === null) {
+            $aImageTypes = array(
+                'apng',
+                'bmp',
+                'gif',
+                'jpg',
+                'jpeg',
+                'mng',
+                /*'pdf', /* Requires special treament in the HTML to be displayed*/
+                'png',
+                'svg',
+                'tiff',
+                'xbm',
+                'xr',
+            );
 
-            $aResult = executeCommand('dot -T?');
-            if (strpos($aResult['stderr'], 'Format: "?" not recognized') !== 0) {
+            $aTextTypes = array(
+                'plain',
+                'plain-ext',
+            );
+
+            $aUnknowTypes = array(
+                'canon',
+                'cmap',
+                'cmapx',
+                'cmapx_np',
+                'dot',
+                'eps',
+                'fig',
+                'gd',
+                'gd2',
+                'gv',
+                'imap',
+                'imap_np',
+                'ismap',
+                'jpe',
+                'pdf',
+                'ps',
+                'ps2',
+                'svgz',
+                'tk',
+                'vml',
+                'vmlz',
+                'vrml',
+                'wbmp',
+                'x11',
+                'xdot',
+                'xlib',
+            );
+            $aSupportedImageTypes = array_intersect($aImageTypes, $p_aSupportedTypes);
+        }
+
+        return $aSupportedImageTypes;
+    }
+
+    // @TODO: Get these values from config/cache created at build time...
+    public function getSupportedOutputTypes($p_sOutput)
+    {
+        static $aOutputTypes;
+
+        if ($aOutputTypes === null) {
+            if (strpos($p_sOutput, 'Format: "?" not recognized') !== 0) {
                 throw new \UnexpectedValueException('Could not get available file formats');
             } else {
-                list($sPrefix1, $sPrefix2, $sList) = explode(':', $aResult['stderr']);
-                $aImageTypes = explode(' ', trim($sList));
+                list($sPrefix1, $sPrefix2, $sList) = explode(':', $p_sOutput);
+                $aOutputTypes = explode(' ', trim($sList));
             }
         }
 
-        return $aImageTypes;
+        return $aOutputTypes;
     }
 
     /**
