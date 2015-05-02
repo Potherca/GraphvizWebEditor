@@ -4,7 +4,7 @@
 [![Dependency Badge]][VersionEye Page]
 [![Codacy Badge]][Codacy Page]
 [![Build Status Badge]][Codeship Page]
-[![License Badge]][GPL3+]
+[![License Badge]][GPL-3.0]
 [![Waffle Badge]][Waffle Page]
 
 ## Introduction
@@ -64,13 +64,13 @@ These buildpacks will be automatically picked up if you set the heroku-buildpack
 - **Authors**:
     - Main code by [Potherca]
     - Bug fixes and several improvements gracefully provided by [Anne van Rossum]
-- **License**: [GPL3+]
+- **License**: [GPL-3.0]
 
 Want to contribute or see the project progress? Visit the [Waffle Page]!
 
 [Anne van Rossum]: https://github.com/mrquincle
 [compile script]: https://github.com/mrquincle/heroku-buildpack-graphviz/blob/master/bin/compile
-[GPL3+]: ./LICENSE
+[GPL-3.0]: ./LICENSE
 [graphviz.herokuapp.com]: http://graphviz.herokuapp.com
 [Potherca]: http://pother.ca/
 
@@ -84,7 +84,7 @@ Want to contribute or see the project progress? Visit the [Waffle Page]!
 [Build Status Badge]:       https://img.shields.io/codeship/80020200-1764-0132-87c7-1e682cfc0f53.svg
 [Codacy Badge]:             https://www.codacy.com/project/badge/588fcadde4084ddc91503a8d8da4afe1
 [Dependency Badge]:         https://www.versioneye.com/user/projects/53fcf2bae09da3cbb2000717/badge.svg?style=flat
-[License Badge]:            https://img.shields.io/badge/License-GPL3%2B-lightgray.svg
+[License Badge]:            https://img.shields.io/badge/License-GPL--3.0-blue.svg
 [Project Stage Badge: Production Ready]:   https://img.shields.io/badge/Project%20Stage-Production%20Ready-brightgreen.svg
 [Version Badge]:            https://img.shields.io/github/tag/potherca/GraphvizWebEditor.svg
 [Waffle Badge]:             https://badge.waffle.io/potherca/GraphvizWebEditor.png?label=waffle:%20ready%20for%20development&title=Issues%20ready%20for%20development
