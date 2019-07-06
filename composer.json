@@ -23,7 +23,7 @@
         }
     },
     "require": {
-        "league/flysystem": "~0.5",
+        "league/flysystem": "~1.0",
         "symfony/process" : "~2.5",
         "phptal/phptal": "~1.3"
     }
