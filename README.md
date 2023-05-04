@@ -5,7 +5,7 @@
 
 ## Introduction
 
-A GraphViz editor, which is live on [graphviz.herokuapp.com].
+A GraphViz editor.
 
 ## Installation
 
