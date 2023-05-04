@@ -1,11 +1,7 @@
 # GraphViz editor
 
 [![Project Stage Badge: Production Ready]][Project Stage Page]
-[![Dependency Badge]][VersionEye Page]
-[![Codacy Badge]][Codacy Page]
-[![Build Status Badge]][Codeship Page]
 [![License Badge]][GPL-3.0]
-[![Waffle Badge]][Waffle Page]
 
 ## Introduction
 
@@ -74,17 +70,9 @@ Want to contribute or see the project progress? Visit the [Waffle Page]!
 [graphviz.herokuapp.com]: http://graphviz.herokuapp.com
 [Potherca]: http://pother.ca/
 
-[Codacy Page]:          https://www.codacy.com/public/potherca/GraphvizWebEditor.git
-[Codeship Page]:        https://www.codeship.io/projects/34086
 [Project Stage Page]:   http://bl.ocks.org/potherca/a2ae67caa3863a299ba0
 [Releases Page]:        /releases/
-[VersionEye Page]:      https://www.versioneye.com/user/projects/53fcf2bae09da3cbb2000717
-[Waffle Page]:          https://waffle.io/potherca/GraphvizWebEditor
 
-[Build Status Badge]:       https://img.shields.io/codeship/80020200-1764-0132-87c7-1e682cfc0f53.svg
-[Codacy Badge]:             https://www.codacy.com/project/badge/588fcadde4084ddc91503a8d8da4afe1
-[Dependency Badge]:         https://www.versioneye.com/user/projects/53fcf2bae09da3cbb2000717/badge.svg?style=flat
 [License Badge]:            https://img.shields.io/badge/License-GPL--3.0-blue.svg
 [Project Stage Badge: Production Ready]:   https://img.shields.io/badge/Project%20Stage-Production%20Ready-brightgreen.svg
 [Version Badge]:            https://img.shields.io/github/tag/potherca/GraphvizWebEditor.svg
-[Waffle Badge]:             https://badge.waffle.io/potherca/GraphvizWebEditor.png?label=waffle:%20ready%20for%20development&title=Issues%20ready%20for%20development
