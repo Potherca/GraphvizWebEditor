@@ -6,6 +6,7 @@
 ## Introduction
 
 A GraphViz editor. Can be seen live at: https://graphviz-editor.glitch.me/
+No longer actively maintained.
 
 ## Installation
 
