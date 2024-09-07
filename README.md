@@ -5,9 +5,11 @@
 
 ## Introduction
 
-A GraphViz editor.
+A GraphViz editor. Can be seen live at: https://graphviz-editor.glitch.me/
 
 ## Installation
+
+Requires Graphviz `dot` command [to be installed](https://graphviz.org/download/)
 
 ### Install instructions
 
